@@ -8,22 +8,26 @@
     <title>Library</title>
 </head>
 <body>
-    <h1>Library</h1>
-    <div class="container"></div>
-    <form action="" class="form">
-        <label for="title">Name:</label>
-        <input type="text" name="title" id="title" value="">
+    <header>
+        <h1>Library</h1>
+    </header>
+    <main>
         
-        <label for="author">Author:</label>
-        <input type="text" name="author" id="author" value="">
-        
-        <label for="pages">Number Of Pages:</label>
-        <input type="text" name="pages" id="pages" value="0">
-        
-        <label for="rPages">Pages Read:</label>
-        <input type="text" name="rPages" id="rPages" value="0">
-        <button type="submit" class="submit">submit</button>
-    </form>
+        <a href="#form">Add Book</a>
+        <div class="container"></div>
+    </main>   
+        <form action="" class="form" id="form">
+            <h1>Add Book</h1>
+            <hr/>
+            <input type="text" name="title" id="title" value="" placeholder="Book Title">  
+            
+            <input type="text" name="author" id="author" value="" placeholder="Author">
+            <input type="text" name="pages" id="pages" value="" placeholder="No of Pages">
+            <input type="text" name="rPages" id="rPages" value="" placeholder="Completed Pages(Cannot Be More than No of Pages)">
+            <input type="submit" class="submit">
+        </form>
+   
+    
     <script src="script.js"></script>
 </body>
 </html>

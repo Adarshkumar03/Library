@@ -35,18 +35,29 @@ function printBooks(){
         const card = document.createElement("div");
         card.classList.add("card");
         card.dataset.num = `${index}`;
+
         const heading = document.createElement("h2");
         heading.textContent = `${book.name}`;
+
         const author = document.createElement("h3");
-        author.textContent = `${book.author}`;
+        author.textContent = `By ${book.author}`;
+
         const pages = document.createElement("p");
-        pages.textContent = `${book.noOfPages}`;
+        pages.textContent = `${book.noOfPages} pages`;
+
         const read = document.createElement("p");
-        read.textContent = `${book.pagesRead}`;
+        read.textContent = `${book.pagesRead} pages completed`;
+
+        const buttonDiv = document.createElement("div");
         const clear = document.createElement("button");
         clear.textContent = "remove";
         const isRead = document.createElement("button");
-        isRead.textContent = "not read";
+        if(book.isRead){
+          isRead.textContent = "read";
+        }else{
+          isRead.textContent = "not read";
+        }
+        
 
         isRead.addEventListener("click", function(e){
             if(isRead.textContent === "not read"){
@@ -62,12 +73,15 @@ function printBooks(){
            printBooks();
         })
 
+        buttonDiv.appendChild(clear);
+        buttonDiv.appendChild(isRead);
+        const hr = document.createElement("hr");
         card.appendChild(heading);
+        card.appendChild(hr);
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read);
-        card.appendChild(isRead);
-        card.appendChild(clear);
+        card.appendChild(buttonDiv);
         container.appendChild(card);
     })
 }
@@ -82,7 +96,7 @@ button.addEventListener("click", function(e){
     if(noOfPages === pagesRead){
         isR = true;
     }
-    addBookToLibrary(name,author,noOfPages,pagesRead, true);
+    addBookToLibrary(name,author,noOfPages,pagesRead, isR);
 })
 
 printBooks();

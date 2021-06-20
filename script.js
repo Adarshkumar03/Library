@@ -2,20 +2,21 @@
 const container = document.querySelector(".container");    
 const button = document.querySelector(".submit");
 const form = document.querySelector(".form");
+const addBookBtn = document.querySelector(".add-form-btn");
+const overlay = document.querySelector(".overlay");
 
 let myLibrary = JSON.parse(localStorage.getItem("itemsArray")) || [];  
 
 
-function Book(name, author, noOfPages, pagesRead){
+function Book(name, author, noOfPages, isRead){
    this.name = name;
    this.author = author;
    this.noOfPages = noOfPages;
-   this.pagesRead = pagesRead;
-   this.isRead = false;
+   this.isRead = isRead;
 }
 
-function addBookToLibrary(name, author, noOfPages, pagesRead){
-   let book = new Book(name, author, noOfPages, pagesRead);
+function addBookToLibrary(name, author, noOfPages, isRead){
+   let book = new Book(name, author, noOfPages, isRead);
    myLibrary.push(book);
    printBooks();
    localStorage.setItem("itemsArray", JSON.stringify(myLibrary));
@@ -45,8 +46,6 @@ function printBooks(){
         const pages = document.createElement("p");
         pages.textContent = `${book.noOfPages} pages`;
 
-        const read = document.createElement("p");
-        read.textContent = `${book.pagesRead} pages completed`;
 
         const buttonDiv = document.createElement("div");
         const clear = document.createElement("button");
@@ -56,8 +55,8 @@ function printBooks(){
           isRead.textContent = "read";
         }else{
           isRead.textContent = "not read";
-        }
-        
+        }  
+        console.log(book.isRead);
 
         isRead.addEventListener("click", function(e){
             if(isRead.textContent === "not read"){
@@ -75,12 +74,12 @@ function printBooks(){
 
         buttonDiv.appendChild(clear);
         buttonDiv.appendChild(isRead);
+        buttonDiv.classList.add("button-div");
         const hr = document.createElement("hr");
         card.appendChild(heading);
         card.appendChild(hr);
         card.appendChild(author);
         card.appendChild(pages);
-        card.appendChild(read);
         card.appendChild(buttonDiv);
         container.appendChild(card);
     })
@@ -91,12 +90,20 @@ button.addEventListener("click", function(e){
     let name = form.elements.title.value;
     let author = form.elements.author.value;
     let noOfPages = form.elements.pages.value;
-    let pagesRead = form.elements.rPages.value;
-    let isR = false;
-    if(noOfPages === pagesRead){
-        isR = true;
-    }
-    addBookToLibrary(name,author,noOfPages,pagesRead, isR);
+    let isR = form.elements.read.checked;
+    addBookToLibrary(name,author,noOfPages,isR);
+    form.style.transform = "scale(0)";
+  overlay.style.display = "none";
+})
+
+overlay.addEventListener("click", function(){
+  form.style.transform = "scale(0)";
+  overlay.style.display = "none";
+})
+
+addBookBtn.addEventListener("click", function(){
+   form.style.transform = "translate(-50%, -50%) scale(1)";
+   overlay.style.display = "block";
 })
 
 printBooks();

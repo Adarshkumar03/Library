@@ -94,10 +94,7 @@ button.addEventListener("click", function(e){
     addBookToLibrary(name,author,noOfPages,isR);
     form.style.transform = "scale(0)";
     overlay.style.display = "none";
-    form.elemets.title.value = ""; 
-    form.elemets.author.value = ""; 
-    form.elemets.read.checked = false; 
-    form.elemets.pages.value = ""; 
+    form.reset(); 
 })
 
 overlay.addEventListener("click", function(){

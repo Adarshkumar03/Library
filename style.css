@@ -94,7 +94,10 @@ label{
     color:white;
     padding:10px;
     transition: all 0.5s;
+    display: flex;
 }
+
+
 
 .add-form-btn:hover{
     background-color: #21ABA5;
